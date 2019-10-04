@@ -9,23 +9,29 @@ class ProjectsController extends Controller
 {
     public function index()
     {
-        $projects = Project::all();
+        $projects = auth()->user()->projects;
 
         return view('projects.index', compact('projects'));
     }
 
     public function show(Project $project)
     {
-        return view('projects.show')
-            ->withProject($project);
+        return view('projects.show', compact('projects'));
     }
 
     public function store() 
     {
         //validate
-        $attributes = request()->validate(['title' => 'required', 'description' => 'required']);
+        $attributes = request()->validate([
+            'title' => 'required', 
+            'description' => 'required',
+            'owner_id' => 'required'
+            ]);
+        
+        
         //persist
-        Project::create($attributes);
+        auth()->user()->projects()->create($attributes);
+
         //redirect
         return redirect('/projects');
     }
