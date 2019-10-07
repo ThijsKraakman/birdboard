@@ -13,4 +13,8 @@
     box-shadow: 0 2px 7px 0 #b0eaff;
 }
 
+.card {
+    @apply .bg-white .p-5 .rounded-lg .shadow;
+}
+
 @tailwind utilities;
