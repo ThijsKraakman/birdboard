@@ -1,12 +1,13 @@
 @extends ('layouts.app')
 
 @section('content')
+
 <header class="flex items-center mb-3 py-4">
     <div class="flex justify-between items-end w-full">
-        <p class="text-grey-dark text-sm font-normal">
+        <h2 class="text-grey-dark text-sm font-normal">
             <a href="/projects" class="text-grey-dark text-sm font-normal no-underline">My Projects</a> / {{ $project->title }}
-        
-        </p>
+
+        </h2>
         <a href="/projects/create" class="button">New Project</a>
     </div>
 </header>
@@ -16,7 +17,7 @@
         <div class="lg:w-3/4 px-3 mb-6">
             <div class="mb-6">
                 <h2 class="text-grey font-normal mb-3">Tasks</h2>
-            
+
                 <div class="card mb-3">Lorem ipsum.</div>
                 <div class="card mb-3">Lorem ipsum.</div>
                 <div class="card mb-3">Lorem ipsum.</div>
