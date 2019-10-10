@@ -35,7 +35,8 @@ class ProjectsController extends Controller
         //validate
         $attributes = request()->validate([
             'title' => 'required', 
-            'description' => 'required'
+            'description' => 'required',
+            'notes' => 'min:3'
         ]);    
 
         //persist
@@ -44,5 +45,14 @@ class ProjectsController extends Controller
         //redirect
         return redirect($project->path());
     }
-  
+    
+    public function update(Project $project, Task $task)
+    {   
+        $this->authorize('update', $task->project);
+
+        $project->update(request(['notes']));
+        
+
+        return redirect($project->path());
+    }
 }
