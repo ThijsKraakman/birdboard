@@ -7,9 +7,9 @@ use Illuminate\Support\Arr;
 
 class Project extends Model
 {
+    use RecordsActivity;
+
     protected $guarded = [];
-    
-    public $old = [];
 
     public function path()
     {
@@ -29,24 +29,6 @@ class Project extends Model
     public function addTask($body)
     {
         return $this->tasks()->create(compact('body'));
-    }
-
-    public function recordActivity($description)
-    {
-        $this->activity()->create([
-            'description' => $description,
-            'changes' => $this->activityChanges($description)
-        ]);
-    }
-
-    public function activityChanges($description)
-    {
-        if ($description == 'updated') {
-            return [
-                'before' => Arr::except(array_diff($this->old, $this->getAttributes()), 'updated_at'),
-                'after' => Arr::except($this->getChanges(), 'updated_at')
-            ];
-        }
     }
 
     public function activity()
