@@ -59,6 +59,10 @@
                 @include('errors')
         <div class="lg:w-1/4 pt-12">
             @include('projects.card')
+
+         @include('projects.activity.card')
+    
+        </div>
         </div>
     </div>
 </main>
