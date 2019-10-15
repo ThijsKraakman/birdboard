@@ -22,7 +22,7 @@ class ManageProjectsTest extends TestCase
         $this->post('/projects', $project->toArray())->assertRedirect('login');
     }
 
-    public function test_a_user_can_create_a_project()
+    function test_a_user_can_create_a_project()
     {
         $this->signIn();
 
@@ -44,6 +44,13 @@ class ManageProjectsTest extends TestCase
         ->assertSee($attributes['title'])
         ->assertSee($attributes['description'])
         ->assertSee($attributes['notes']);
+    }
+
+    function test_a_user_can_see_projects_they_have_been_invited_to_on_their_dashboard()
+    {
+        $project = tap(ProjectFactory::create())->invite($this->signIn());
+
+        $this->get('/projects')->assertSee($project->title);
     }
 
     function test_a_user_can_delete_a_project()
@@ -71,7 +78,7 @@ class ManageProjectsTest extends TestCase
         // $this->assertDatabaseMissing('projects', $project->only('id'));
     }
 
-    public function test_a_user_can_update_a_project()
+    function test_a_user_can_update_a_project()
     {
         $project = ProjectFactory::create();
 
@@ -84,7 +91,7 @@ class ManageProjectsTest extends TestCase
         $this->assertDatabaseHas('projects', $attributes);
     }
 
-    public function test_a_user_can_update_a_projects_general_notes()
+    function test_a_user_can_update_a_projects_general_notes()
     {
         $project = ProjectFactory::create();
 
