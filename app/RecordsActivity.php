@@ -32,9 +32,9 @@ trait RecordsActivity
     {
         if(isset(static::$recordableEvents)) {
             return $recordableEvents = static::$recordableEvents;
-        } else {
-            return ['created', 'updated', 'deleted'];
-        }
+        } 
+
+            return ['created', 'updated'];
     }
 
     public function recordActivity($description)
